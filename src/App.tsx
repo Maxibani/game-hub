@@ -4,7 +4,7 @@ function App() {
 
    return (
       
-         <Button colorScheme="blue">Button 1</Button>
+         <Button colorPalette="blue">Button 1</Button>
     
       
    )
