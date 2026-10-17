@@ -2,7 +2,7 @@ import { IconButton } from "@chakra-ui/react";
 import { LuMoon, LuSun } from "react-icons/lu";
 import { useColorMode } from "./components/ui/color-mode";
 
-export function ColorModeButton() {
+ function ColorModeButton() {
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
@@ -16,3 +16,4 @@ export function ColorModeButton() {
     </IconButton>
   );
 }
+export default ColorModeButton;
