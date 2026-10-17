@@ -11,7 +11,12 @@ export interface ColorModeProviderProps extends ThemeProviderProps {}
 
 export function ColorModeProvider(props: ColorModeProviderProps) {
   return (
-    <ThemeProvider attribute="class" disableTransitionOnChange {...props} />
+    <ThemeProvider
+      attribute="class"
+      enableSystem
+      disableTransitionOnChange
+      {...props}
+    />
   )
 }
 
@@ -25,13 +30,19 @@ export interface UseColorModeReturn {
 
 export function useColorMode(): UseColorModeReturn {
   const { resolvedTheme, setTheme, forcedTheme } = useTheme()
-  const colorMode = forcedTheme || resolvedTheme
-  const toggleColorMode = () => {
-    setTheme(resolvedTheme === "dark" ? "light" : "dark")
+  const colorMode = (forcedTheme ?? resolvedTheme ?? "light") as ColorMode
+
+  const setColorMode = (nextColorMode: ColorMode) => {
+    setTheme(nextColorMode)
   }
+
+  const toggleColorMode = () => {
+    setTheme(colorMode === "dark" ? "light" : "dark")
+  }
+
   return {
-    colorMode: colorMode as ColorMode,
-    setColorMode: setTheme,
+    colorMode,
+    setColorMode,
     toggleColorMode,
   }
 }
@@ -46,34 +57,41 @@ export function ColorModeIcon() {
   return colorMode === "dark" ? <LuMoon /> : <LuSun />
 }
 
-interface ColorModeButtonProps extends Omit<IconButtonProps, "aria-label"> {}
+interface ColorModeButtonProps extends Omit <IconButtonProps, "aria-label"> {}
 
 export const ColorModeButton = React.forwardRef<
   HTMLButtonElement,
   ColorModeButtonProps
 >(function ColorModeButton(props, ref) {
-  const { toggleColorMode } = useColorMode()
+  const { colorMode, toggleColorMode } = useColorMode()
+
   return (
     <ClientOnly fallback={<Skeleton boxSize="9" />}>
-      <IconButton
-        onClick={toggleColorMode}
-        variant="ghost"
-        aria-label="Toggle color mode"
-        size="sm"
-        ref={ref}
-        {...props}
-        css={{
-          _icon: {
-            width: "5",
-            height: "5",
-          },
-        }}
-      >
-        <ColorModeIcon />
-      </IconButton>
+      <span style={{ display: "inline-flex", alignItems: "center", gap: "0.5rem" }}>
+        <IconButton
+          onClick={toggleColorMode}
+          variant="ghost"
+          aria-label="Toggle color mode"
+          size="sm"
+          ref={ref}
+          {...props}
+          css={{
+            _icon: {
+              width: "5",
+              height: "5",
+            },
+          }}
+        >
+          <ColorModeIcon />
+        </IconButton>
+        <span style={{ fontSize: "0.875rem", fontWeight: 500 }}>
+          {colorMode === "dark" ? "Dark Mode" : "Light Mode"}
+        </span>
+      </span>
     </ClientOnly>
   )
-})
+},
+)
 
 export const LightMode = React.forwardRef<HTMLSpanElement, SpanProps>(
   function LightMode(props, ref) {

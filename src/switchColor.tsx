@@ -1,4 +1,4 @@
-import { IconButton } from "@chakra-ui/react";
+import { IconButton,HStack, Text } from "@chakra-ui/react";
 import { LuMoon, LuSun } from "react-icons/lu";
 import { useColorMode } from "./components/ui/color-mode";
 
@@ -6,6 +6,7 @@ import { useColorMode } from "./components/ui/color-mode";
   const { colorMode, toggleColorMode } = useColorMode();
 
   return (
+    <HStack>
     <IconButton
       aria-label="Toggle color mode"
       onClick={toggleColorMode}
@@ -14,6 +15,12 @@ import { useColorMode } from "./components/ui/color-mode";
     >
       {colorMode === "light" ? <LuMoon /> : <LuSun />}
     </IconButton>
+    <Text fontSize={"sm"} fontWeight={"medium"}>
+      {
+        colorMode ==="dark" ? "Dark Mode" : "Light Mode"
+      }
+    </Text>
+    </HStack>
   );
 }
 export default ColorModeButton;
