@@ -2,7 +2,7 @@ import axios from 'axios';
 
 
 const API =axios.create({
-    baseURL:"https://api.rawg.io/api/games",
+    baseURL:"https://api.rawg.io/api",
 
     params: {
         
