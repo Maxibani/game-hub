@@ -16,7 +16,7 @@ const GameCard = ({game}:Props) => {
   return (
     
 
-  <Card.Root borderRadius={10} overflow= "hidden">
+  <Card.Root borderRadius={10} overflow= "hidden" width= '300px'>
 
         <Image src={getCroppedImageUrl (game.background_image)} />
 
