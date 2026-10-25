@@ -12,12 +12,19 @@ function App() {
       }}
       gap={4}
       p={4}
+
+      templateColumns={{
+        base: '1fr',
+        lg: '200px 1fr'
+      }}
     >
+
+
       <GridItem area="nav">
         <NavBar />
       </GridItem>
 
-      <GridItem area="aside"  hideBelow="lg">
+      <GridItem area="aside"  paddingX={ 5}>
         <GenreList/>
       </GridItem>
 
