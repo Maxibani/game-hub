@@ -18,7 +18,7 @@ const GameCard = ({game}:Props) => {
 
   <Card.Root >
 
-        <Image src={getCroppedImageUrl (game.background_image)} />
+    <Image src={getCroppedImageUrl (game.background_image)} />
 
       <CardBody>
 <Heading fontSize= "2xl">{game.name}</Heading>
