@@ -15,7 +15,7 @@ import { useColorMode } from "./components/ui/color-mode";
     >
       {colorMode === "light" ? <LuMoon /> : <LuSun />}
     </IconButton>
-    <Text fontSize={"sm"} fontWeight={"medium"}>
+    <Text whiteSpace='nowrap' fontSize={"sm"} fontWeight={"medium"}>
       {
         colorMode ==="dark" ? "Dark Mode" : "Light Mode"
       }

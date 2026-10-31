@@ -1,14 +1,16 @@
 import { HStack, Image} from "@chakra-ui/react";
 import logo from "../assets/logo.webp";
 import { ColorModeButton } from "../components/ui/color-mode";
+import SearchInput from "./SearchInput";
 
 const NavBar = () => {
   return (
-    <HStack justify="space-between" width="100%" px={4} py={2}>
-      <HStack>
+    <HStack padding= "10px" width="100%" >
+      
         <Image src={logo} boxSize="50px" alt="Game Hub logo" />
+        <SearchInput/>
         
-      </HStack>
+      
 
       <ColorModeButton />
     </HStack>
