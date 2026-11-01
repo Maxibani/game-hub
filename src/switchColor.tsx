@@ -12,10 +12,11 @@ import { useColorMode } from "./components/ui/color-mode";
       onClick={toggleColorMode}
       variant="outline"
       size="sm"
+      flexShrink={0}
     >
       {colorMode === "light" ? <LuMoon /> : <LuSun />}
     </IconButton>
-    <Text whiteSpace='nowrap' fontSize={"sm"} fontWeight={"medium"}>
+    <Text  fontSize={"sm"} fontWeight={"medium"} >
       {
         colorMode ==="dark" ? "Dark Mode" : "Light Mode"
       }
