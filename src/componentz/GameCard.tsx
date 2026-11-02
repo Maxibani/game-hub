@@ -22,13 +22,15 @@ const GameCard = ({game}:Props) => {
     <Image src={getCroppedImageUrl (game.background_image)} />
 
       <CardBody>
-<Heading fontSize= "2xl">{game.name} <Emojie rating={game.rating_top}/></Heading>
+
 <HStack justifyContent ='space-between'>
   <PlatformsIconsList platforms = {game.parent_platforms.map(p => p.platform)} />
 
   <CriticScore score ={game.metacritic} />
+ 
 
 </HStack>
+ <Heading fontSize= "2xl">{game.name} <Emojie rating={game.rating_top}/></Heading>
       </CardBody>
   </Card.Root>
 
