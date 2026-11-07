@@ -11,11 +11,14 @@ const SearchInput = ({onSearch}:Props) => {
   const ref = useRef<HTMLInputElement>(null);
  
   return (
-   <form onSubmit={(event) =>{event.preventDefault();
- if (ref.current) onSearch(ref.current.value);
-   }}>
-     <InputGroup  flex= '1'
-     endElement={<BsSearch />} >
+   <form
+     style={{ flex: 1, minWidth: 0 }}
+     onSubmit={(event) => {
+       event.preventDefault();
+       if (ref.current) onSearch(ref.current.value);
+     }}
+   >
+     <InputGroup width="100%" endElement={<BsSearch />}>
      
      
       <Input ref ={ref} borderRadius={20} placeholder='Search games...' variant= {'outline'}/>
