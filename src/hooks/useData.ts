@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import apiClient from "../Services/api-Client";
-import { CanceledError, type AxiosRequestConfig } from "axios";
+import { CanceledError, isAxiosError, type AxiosRequestConfig } from "axios";
 
 
 
@@ -20,7 +20,8 @@ const useData =<T> (endpoint:string, requestConfig?: AxiosRequestConfig, deps?: 
 
                    // eslint-disable-next-line react-hooks/set-state-in-effect
                    setLoading(true);
-            apiClient.get<FetchResponse <T>>(endpoint,{signal:controller.signal, ...requestConfig})
+                   setError('');
+            apiClient.get<FetchResponse <T>>(endpoint,{...requestConfig, signal:controller.signal})
             
         .then((res) => {
             setData(res.data.results);
@@ -30,7 +31,15 @@ const useData =<T> (endpoint:string, requestConfig?: AxiosRequestConfig, deps?: 
 
                 .catch((err) =>{
                     if (err instanceof CanceledError ) return;
-                    setError(err.message)
+                    if (isAxiosError(err)) {
+                        setError(
+                            err.response
+                                ? `Request failed with status ${err.response.status}.`
+                                : `Network error: ${err.message}. Check your connection and API settings.`,
+                        );
+                    } else {
+                        setError(err instanceof Error ? err.message : 'An unexpected error occurred.');
+                    }
                     setLoading(false);
         });
 
